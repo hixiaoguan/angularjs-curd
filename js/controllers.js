@@ -113,7 +113,6 @@ pageList.controller("arcListCtrl",["$scope","$http","$location",function($scope,
       //获取Id执行删除
        var gets="?action=delete_article&id="+Id;
         console.log(gets);
-
         $http({
             method  : 'GET',
             url     : 'get.php'+gets,
@@ -135,9 +134,7 @@ pageList.controller("arcListCtrl",["$scope","$http","$location",function($scope,
                  setTimeout(function(){$("#errorbox").removeClass().animate({opacity:'0'});}, 800);
             }
         });
-
  };
-
 }]);
 
 /**
@@ -187,6 +184,12 @@ addCont.controller('AddContCtrl', function($scope, $http) {
             headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
         })
         .success(function(data) {
+            $scope.errorBye=function(){
+                $('#errorbox').fadeOut();
+            }
+            $scope.errorShow=function(){
+                $('#errorbox').fadeIn();
+            }
             if (!data.errors) {
                 //添加成功
                 console.log('插入成功');
@@ -198,22 +201,16 @@ addCont.controller('AddContCtrl', function($scope, $http) {
                 console.log('插入失败');
                 $scope.meg_success="";
                 var get_error="";
-                if(data.errors.title){
+                if(data.errors.hasOwnProperty('title')){
                     get_error=data.errors.title;
                 }
-                if(data.errors.content){
+                if(data.errors.hasOwnProperty('content')){
                     get_error=get_error+(get_error?"&":"")+data.errors.content;
                 }
-                if(data.errors.typeid){
+                if(data.errors.hasOwnProperty('typeid')){
                     get_error=get_error+(get_error?"&":"")+data.errors.typeid;
                 }
                 $scope.meg_error=get_error;
-                $scope.errorBye=function(){
-                    $('#errorbox').fadeOut();
-                }
-                $scope.errorShow=function(){
-                    $('#errorbox').fadeIn();
-                }
             }
         });
     };
@@ -276,19 +273,26 @@ modifyCont.controller('ModifyContCtrl', function($scope, $http, $stateParams) {
                 console.log('修改失败');
                 var get_errors="";
                 $scope.meg_success="";
-                if(data.errors.title){
-                    get_errors=data.errors.title;
-                }
-                if(data.errors.content){
-                    get_errors=get_errors+(get_errors?"&":"")+data.errors.content;
-                }
-                $scope.meg_error=get_errors;
-                console.log($scope.meg_error);
+                //信息提示框状态
                 $scope.errorBye=function(){
                     $('#errorbox').fadeOut();
                 }
                 $scope.errorShow=function(){
                     $('#errorbox').fadeIn();
+                    $scope.meg_error='';
+                }
+                if(data.errors){
+                    console.log("有错误信息");
+                    if(data.errors.hasOwnProperty('title')){
+                        get_errors=data.errors.title;
+                    }
+                    if(data.errors.hasOwnProperty('content')){
+                        get_errors=get_errors+(get_errors?"&":"")+data.errors.content;
+                    }
+                    $scope.meg_error=get_errors;
+                }else{
+                    console.log("无错误信息");
+                    $scope.meg_error="修改失败，无改动！";
                 }
             }
         });

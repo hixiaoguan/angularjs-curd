@@ -88,7 +88,7 @@ if ($action == 'update_article') {
     if (empty($typeid)) {
         $reArr['errors']['typeid'] = '分类必须';
     }
-    if (empty($title) || empty($content) || empty($typeid['id'])) {
+    if (empty($title) || empty($content) || empty($typeid)) {
         echo json_encode($reArr);
         return;
     }
