@@ -1,0 +1,56 @@
+<div class="panel panel-primary" ng-app="addCont">
+    <div class="panel-heading">
+        <div class="panel-title">新增内容</div>
+    </div>
+    <div class="panel-body" ng-controller="AddContCtrl">
+        <div class="row megbox">
+            <div id="successbox" role="alert" ng-show="meg_success">
+                {{meg_success}}
+            </div>
+            <div id="errorbox" role="alert" ng-show="meg_error">
+                {{meg_error}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <form class="form-horizontal" role="form" name="form" ng-submit="postForm()">
+                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            标题：
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" name="title" class="form-control" placeholder="标题" ng-model="formData.title" ng-click="errorBye()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            内容：
+                        </label>
+                        <div class="col-md-10">
+                            <textarea rows="6" name="content" class="form-control" placeholder="内容" ng-model="formData.content" ng-click="errorBye()"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            类别：
+                        </label>
+                        <div class="col-md-3">
+                            <select name="typeid" class="form-control" ng-model="formData.typeid" ng-options="m.typename for m in lists" ng-click="errorBye()">
+                                <option value="">-- 选择分类 --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="保存" class="btn btn-success" ng-disabled="!form.$dirty" ng-click="errorShow()"/>
+                            <a ui-sref="list({type:0})" class="btn btn-primary">取消</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

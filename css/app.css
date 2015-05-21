@@ -1,0 +1,19 @@
+body{font-family:'Microsoft YaHei';}
+.clb{clear: both;}
+.center{ text-align: center;}
+.subtit{height: 3em; line-height: 3em; border-bottom: 1px solid #ccc;margin: 30px 0 10px;letter-spacing: 1.8px;}
+
+/*page*/
+.page-list .pagination {float:left;}
+.page-list .pagination span {cursor: pointer;}
+.page-list .pagination .separate span{cursor: default; border-top:none;border-bottom:none;}
+.page-list .pagination .separate span:hover {background: none;}
+.page-list .page-total {float:left; margin: 25px 20px;}
+.page-list .page-total input, .page-list .page-total select{height: 26px; border: 1px solid #ddd;}
+.page-list .page-total input {width: 40px; padding-left:3px;}
+.page-list .page-total select {width: 50px;}
+
+.megbox{position: relative;}
+#successbox{ z-index: 100; left: 50%; color: #468847;background-color: #dff0d8;border-color: #d6e9c6; height: 50px; line-height: 50px;  border-radius: 5px; width: 200px; position:absolute; text-align: center;}
+#errorbox{ z-index: 100; left: 50%; color: #b94a48;background-color: #f2dede;border-color: #ebccd1;height: 50px; line-height: 50px;  border-radius: 5px; width: 200px; position:absolute; text-align: center;}
+.red{color: #ff0000; padding-left:5px;}

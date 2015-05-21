@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接口说明</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>
+        $(function(){
+            $('#1').on('click', function(){
+                $.post(
+                    "get.php", 
+                    {action:"get_total"}, 
+                    function(data){
+                        console.log(data);
+                    }
+                );
+            });
+            $('#2').on('click', function(){
+                $.post(
+                    "get.php", 
+                    {action:"add_article",title:"标题",content:"内容",typeid:"2"}, 
+                    function(data){
+                        console.log(data);
+                    }
+                );
+            });
+            $('#3').on('click', function(){
+                $.post(
+                    "get.php", 
+                    {action:"delete_article",id:"11"}, 
+                    function(data){
+                        console.log(data);
+                    }
+                );
+            });
+            $('#4').on('click', function(){
+                $.post(
+                    "get.php", 
+                    {action:"get_article",id:"6"}, 
+                    function(data){
+                        console.log(data);
+                    }
+                );
+            });
+            $('#5').on('click', function(){
+                $.post(
+                    "get.php", 
+                    {action:"get_arctype"}, 
+                    function(data){
+                        console.log(data);
+                    }
+                );
+            });
+            $('#6').on('click', function(){
+                $.post(
+                    "get.php", 
+                    {action:"get_list",where:"typeid=1",offset:"2",rows:"2",orderField:"id",orderBy:"DESC"}, 
+                    function(data){
+                        console.log(data);
+                    }
+                );
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <button class="btn btn-default" type="button" id="1">get_total</button>
+            <button class="btn btn-default" type="button" id="2">add_article</button>
+            <button class="btn btn-default" type="button" id="3">delete_article</button>
+            <button class="btn btn-default" type="button" id="4">get_article</button>
+            <button class="btn btn-default" type="button" id="5">get_arctype</button>
+            <button class="btn btn-default" type="button" id="6">get_list</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>接口说明文档 <small>更新时间：2015-05-19 by Leo</small></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div id="myTab" class="list-group">
+                    <a href="#get_article_list" class="list-group-item active">获取文章列表</a>
+                    <a href="#get_article_total" class="list-group-item">获取文章总数</a>
+                    <a href="#add_article" class="list-group-item">添加文章</a>
+                    <a href="#delete_article" class="list-group-item">删除文章</a>
+                    <a href="#get_article" class="list-group-item">获得一篇文章</a>
+                    <a href="#update_article" class="list-group-item">更新文章</a>
+                    <a href="#code_intro" class="list-group-item">返回码说明</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div id="get_article_list" class="tab-pane active">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">获取文章列表</div>
+                            <div class="panel-body">
+                                <h4>调用示例</h4>
+<pre>{
+    "action":"get_list",
+    "where":"typeid = 1",
+    "offset":0,
+    "rows":10,
+    "orderField":"id",
+    "orderBy":"DESC",
+}</pre>
+                                <h4>参数说明</h4>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <th class="col-md-2">参数</th>
+                                        <th class="col-md-2">是否必须</th>
+                                        <th  class="col-md-8">说明</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>action</td>
+                                            <td>是</td>
+                                            <td>操作方法 get_list</td>
+                                        </tr>
+                                        <tr>
+                                            <td>where</td>
+                                            <td>否</td>
+                                            <td>查询条件的字符串</td>
+                                        </tr>
+                                        <tr>
+                                            <td>offset</td>
+                                            <td>否</td>
+                                            <td>从全部记录的该偏移位置开始返回，0表示从第一条记录返回</td>
+                                        </tr>
+                                        <tr>
+                                            <td>rows</td>
+                                            <td>否</td>
+                                            <td>返回记录的数量，取值在1到100之间</td>
+                                        </tr>
+                                        <tr>
+                                            <td>orderField</td>
+                                            <td>否</td>
+                                            <td>排序方式的字段</td>
+                                        </tr>
+                                        <tr>
+                                            <td>orderBy</td>
+                                            <td>否</td>
+                                            <td>排序方式： DESC(默认) ASC</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h4>返回说明</h4>
+                                <pre>返回符合查询条件的记录</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="get_article_total" class="tab-pane">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">获取文章总数</div>
+                            <div class="panel-body">
+                                <h4>调用示例</h4>
+                                <pre>
+{
+    "action":"get_total",
+    "where":"typeid=2"
+}</pre>
+                                <h4>参数说明</h4>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <th class="col-md-2">参数</th>
+                                        <th class="col-md-2">是否必须</th>
+                                        <th  class="col-md-8">说明</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>action</td>
+                                            <td>是</td>
+                                            <td>操作方法 get_total</td>
+                                        </tr>
+                                        <tr>
+                                            <td>where</td>
+                                            <td>否</td>
+                                            <td>查询条件的字符串</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h4>返回说明</h4>
+                                <pre>返回符合查询条件的记录数</pre>
+                                <h4>返回参数说明</h4>
+                                <pre>{"total":"9"}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="add_article" class="tab-pane">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">添加文章</div>
+                            <div class="panel-body">
+                                <h4>调用示例</h4>
+                                <pre>
+{
+    "action":"add_article",
+    "title":"标题",
+    "content":"内容",
+    "typeid":"2"
+}</pre>
+                                <h4>参数说明</h4>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <th class="col-md-2">参数</th>
+                                        <th class="col-md-2">是否必须</th>
+                                        <th  class="col-md-8">说明</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>action</td>
+                                            <td>是</td>
+                                            <td>操作方法 add_article</td>
+                                        </tr>
+                                        <tr>
+                                            <td>title</td>
+                                            <td>是</td>
+                                            <td>文章标题</td>
+                                        </tr>
+                                        <tr>
+                                            <td>content</td>
+                                            <td>是</td>
+                                            <td>文章内容</td>
+                                        </tr>
+                                        <tr>
+                                            <td>typeid</td>
+                                            <td>是</td>
+                                            <td>所属分类id</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h4>返回说明</h4>
+                                <pre>返回写入文章的id</pre>
+                                <h4>返回参数</h4>
+                                <pre>{"article_id":"12"}</pre>
+                                <h4>错误返回</h4>
+<pre>{"errors":{"title":"标题必须","content":"内容必须","typeid":"分类必须"}}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="delete_article" class="tab-pane">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">删除文章</div>
+                            <div class="panel-body">
+                                <h4>调用示例</h4>
+                                <pre>
+{
+    "action":"delete_article",
+    "id":"25"
+}</pre>
+                                <h4>参数说明</h4>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <th class="col-md-2">参数</th>
+                                        <th class="col-md-2">是否必须</th>
+                                        <th  class="col-md-8">说明</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>action</td>
+                                            <td>是</td>
+                                            <td>操作方法 delete_article</td>
+                                        </tr>
+                                        <tr>
+                                            <td>id</td>
+                                            <td>是</td>
+                                            <td>文章id</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h4>返回说明</h4>
+                                <pre>返回code</pre>
+                                <h4>返回参数</h4>
+                                <pre>{"code":"101"}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="get_article" class="tab-pane">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">获得一篇文章</div>
+                            <div class="panel-body">
+                                <h4>调用示例</h4>
+                                <pre>
+{
+    "action":"get_article",
+    "id":"25"
+}</pre>
+                                <h4>参数说明</h4>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <th class="col-md-2">参数</th>
+                                        <th class="col-md-2">是否必须</th>
+                                        <th  class="col-md-8">说明</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>action</td>
+                                            <td>是</td>
+                                            <td>操作方法 get_article</td>
+                                        </tr>
+                                        <tr>
+                                            <td>id</td>
+                                            <td>是</td>
+                                            <td>文章id</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h4>返回说明</h4>
+                                <pre>返回一条记录</pre>
+                                <h4>返回参数</h4>
+                                <pre>{"id":"6","title":"a","content":"a","addtime":"1431314306","typeid":"2","typename":"IOS","reid":"0"}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="update_article" class="tab-pane">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">更新文章</div>
+                            <div class="panel-body">
+                                <h4>调用示例</h4>
+                                <pre>
+{
+    "action":"update_article",
+    "id":"6",
+    "title":"标题",
+    "content":"内容",
+    "typeid":"2"
+}</pre>
+                                <h4>参数说明</h4>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <th class="col-md-2">参数</th>
+                                        <th class="col-md-2">是否必须</th>
+                                        <th  class="col-md-8">说明</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>action</td>
+                                            <td>是</td>
+                                            <td>操作方法 update_article</td>
+                                        </tr>
+                                        <tr>
+                                            <td>id</td>
+                                            <td>是</td>
+                                            <td>文章id（条件）</td>
+                                        </tr>
+                                        <tr>
+                                            <td>title</td>
+                                            <td>是</td>
+                                            <td>标题</td>
+                                        </tr>
+                                        <tr>
+                                            <td>content</td>
+                                            <td>是</td>
+                                            <td>内容</td>
+                                        </tr>
+                                        <tr>
+                                            <td>typeid</td>
+                                            <td>是</td>
+                                            <td>所属分类id</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h4>返回说明</h4>
+                                <pre>状态</pre>
+                                <h4>返回参数</h4>
+                                <pre>{"code":"101"}</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="code_intro" class="tab-pane">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">返回码说明</div>
+                            <div class="panel-body">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <th class="col-md-2">code</th>
+                                        <th  class="col-md-10">说明</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>101</td>
+                                            <td>操作成功</td>
+                                        </tr>
+                                        <tr>
+                                            <td>102</td>
+                                            <td>操作失败</td>
+                                        </tr>
+                                        <tr>
+                                            <td>103</td>
+                                            <td>分类不存在</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#myTab a').click(function (e) {
+          e.preventDefault();
+          $(this).tab('show');
+        })
+    </script>
+</body>
+</html>

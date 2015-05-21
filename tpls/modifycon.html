@@ -1,0 +1,59 @@
+<div class="panel panel-primary" ng-app="modifyCont">
+    <div class="panel-heading">
+        <div class="panel-title">修改内容</div>
+    </div>
+    <div class="panel-body" ng-controller="ModifyContCtrl">
+
+        <div class="row megbox">
+            <div id="successbox" role="alert" ng-show="meg_success">
+                {{meg_success}}
+            </div>
+            <div id="errorbox" role="alert" ng-show="meg_error">
+                {{meg_error}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-horizontal" name="form" ng-submit="postForm()">
+                    
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            标题：
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" name="title" id="title" class="form-control" value="{{lists.title}}" ng-click="errorBye()" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            内容：
+                        </label>
+                        <div class="col-md-10">
+                            <textarea name="content" id="content" rows="6" class="form-control" ng-click="errorBye()">{{lists.content}}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            类别：
+                        </label>
+                        <div class="col-md-10">
+
+                            <select class="form-control" name="typeid" id="typeid" ng-click="errorBye()">
+                              <option ng-show="{{tclick}}" value="{{lists.typeid}}" checked>{{lists.typename}}</option>
+                              <option ng-repeat="type in types" value="{{type.id}}">{{type.typename}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="保存" class="btn btn-success" ng-click="errorShow()"/>
+                            <a ui-sref="list({type:0})" class="btn btn-primary">取消</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
